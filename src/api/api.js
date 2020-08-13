@@ -17,6 +17,6 @@ export const authApi = {
 
 export const usersApi = {
     getUsers(token) {
-        return usersInstance.get("/api/v1/users/", { headers: {"Authorization": `Token ${token}`}})
+        return usersInstance.get("/api/v1/users/", {headers: {"Authorization": `Token ${token}`}})
     }
 }

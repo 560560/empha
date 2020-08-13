@@ -1,13 +1,13 @@
 import React from 'react';
 import {Formik} from "formik";
-import {Button, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
+import {Alert, Button, Col, Container, Form, InputGroup, Row} from "react-bootstrap";
 import * as Yup from 'yup'
 import passwordIcon from '../../assets/images/passwordlIcon.svg'
 import usernameIcon from '../../assets/images/usernameIcon.svg'
 import {Redirect} from "react-router-dom";
 
 
-const Login = ({login, isAuth}) => {
+const Login = ({login, isAuth, error}) => {
 
 
     const getLoginData = (formData) => {
@@ -104,12 +104,24 @@ const Login = ({login, isAuth}) => {
                                     </Form.Group>
 
 
-                                    <Form.Group as={Row} controlId="RememberMe" className="d-flex align-items-center justify-content-between">
+                                    <Form.Group as={Row} className="d-flex align-items-center justify-content-between">
 
                                         <Col className="d-flex justify-content-end col-sm-8 col-12 ml-auto">
                                             <Button style={{width: "100%"}} className="" type="submit1" variant="info">Login</Button>
                                         </Col>
+
                                     </Form.Group>
+
+                                    {error &&
+                                    <Form.Group as={Row} className="d-flex align-items-center justify-content-between">
+                                        <Col className="d-flex justify-content-end col-sm-8 col-12 ml-auto">
+                                            <Alert variant="danger">
+                                                {error}
+                                            </Alert>
+                                        </Col>
+                                    </Form.Group>
+                                    }
+
 
                                 </Form>
 
