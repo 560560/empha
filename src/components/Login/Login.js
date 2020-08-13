@@ -93,7 +93,7 @@ const Login = ({login, isAuth}) => {
                                                     onChange={handleChange}
                                                     isInvalid={touched.password && !!errors.password}
                                                     isValid={touched.password && !errors.password}
-
+                                                    autoComplete="password"
 
                                                 />
                                                 <Form.Control.Feedback type="invalid" className="text-center">
