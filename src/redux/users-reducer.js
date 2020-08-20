@@ -3,11 +3,14 @@ import {usersApi} from "../api/api";
 const SET_USERS = "users-reducer/SET_USERS"
 const SET_USERNAME_SEARCH_SELECTOR = "users-reducer/SET_USERNAME_SEARCH_SELECTOR"
 const CLEAR_WHILE_LOGOUT = "users-reducer/CLEAR_WHILE_LOGOUT"
+const SET_SORTING = "users-reducer/SET_SORTING"
 
 
 let initialState = {
     users: null,
-    usernameSearchSelector: null
+    usernameSearchSelector: null,
+    sortingBy: "id",
+    sortingFlow: "increase",
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -27,8 +30,14 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: null
             }
-        default: {
 
+        case SET_SORTING :
+            return {
+                ...state,
+                sortingBy: action.field,
+                sortingFlow: action.flow
+            }
+        default: {
             return state
         }
     }
@@ -45,6 +54,10 @@ export const setUsernameSearchSelector = (payload) => {
 
 export const clearWhileLogout = () => {
     return {type: CLEAR_WHILE_LOGOUT}
+}
+
+export const setSorting = (field, flow) => {
+    return {type: SET_SORTING, field, flow}
 }
 
 //THUNK CREATORS

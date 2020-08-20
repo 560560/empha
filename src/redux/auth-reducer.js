@@ -51,7 +51,7 @@ const authReducer = (state = initialState, action) => {
 
 //ACTION CREATORS
 
-const setToken = (token, username) => {
+export const setToken = (token, username) => {
     return {type: SET_TOKEN, token, username}
 }
 const setLogout = () => {
@@ -74,6 +74,9 @@ export const login = ({username, password}) => async (dispatch) => {
         let response = await authApi.login(username, password)
         if (response.status === 200) {
             dispatch(setToken(response.data.token, username))
+            localStorage.isAuth = true;
+            localStorage.token = response.data.token
+            localStorage.username = username
         }
     } catch (err) {
         if (err.message === "Request failed with status code 400") {
@@ -89,6 +92,7 @@ export const login = ({username, password}) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     dispatch(setLogout())
     dispatch(clearWhileLogout())
+    localStorage.clear()
 }
 
 
